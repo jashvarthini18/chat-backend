@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.json({ msg: "Messages route working 🚀" });
 });
+
 router.get("/users", protectRoute, getUsersForSidebar);
 router.get("/:id", protectRoute, getMessages);
 
