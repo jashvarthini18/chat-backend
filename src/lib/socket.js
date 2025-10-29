@@ -52,6 +52,8 @@ const io = new Server(server, {
       "https://chat-frontend-psi-eight.vercel.app",
       "https://chat-frontend-omega-navy.vercel.app"
     ],
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 

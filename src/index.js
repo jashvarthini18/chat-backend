@@ -42,7 +42,7 @@
 // server.listen(PORT, () => {
 //   console.log("server is running on PORT:" + PORT);
 //   connectDB();
-// });
+// });Fix:
 
 import express from "express";
 import dotenv from "dotenv";
