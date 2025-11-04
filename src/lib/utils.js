@@ -123,11 +123,13 @@ export const generateToken = (userId, res) => {
   });
 
   res.cookie("jwt", token, {
-    httpOnly: true,
-    secure: true, // ✅ required on Render
-    sameSite: "none", // ✅ cross-domain cookies for Vercel <-> Render
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "none",
+  path: "/",
+  maxAge: 7 * 24 * 60 * 60 * 1000
+});
+
 
   return token;
 };

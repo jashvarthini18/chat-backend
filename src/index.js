@@ -66,7 +66,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://chat-frontend-psi-eight.vercel.app",
       "https://chat-frontend-omega-navy.vercel.app" // ✅ added
     ],
     credentials: true,
