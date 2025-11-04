@@ -117,19 +117,34 @@ export const getReplySuggestions = async (messages) => {
   }
 };
 
+// export const generateToken = (userId, res) => {
+//   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+//     expiresIn: "7d",
+//   });
+
+//   res.cookie("jwt", token, {
+//   httpOnly: true,
+//   secure: process.env.NODE_ENV === "production",
+//   sameSite: "none",
+//   path: "/",
+//   maxAge: 7 * 24 * 60 * 60 * 1000
+// });
+
 export const generateToken = (userId, res) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });
 
   res.cookie("jwt", token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "none",
-  path: "/",
-  maxAge: 7 * 24 * 60 * 60 * 1000
-});
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // ✅ Only secure on Render/Vercel
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✅ Required for cross-domain
+    path: "/", // ✅ Important for all routes
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  });
 
+  return token;
+};
 
   return token;
 };
