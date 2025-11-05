@@ -117,8 +117,10 @@ export const generateToken = (userId, res) => {
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // ✅ Only HTTPS
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✅ Allow cross-site
+    // secure: process.env.NODE_ENV === "production", // ✅ Only HTTPS
+    secure: true,
+    sameSite: "none",
+    // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✅ Allow cross-site
     path: "/",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
