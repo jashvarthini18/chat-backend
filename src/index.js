@@ -43,7 +43,6 @@
 //   console.log("server is running on PORT:" + PORT);
 //   connectDB();
 // });Fix:
-
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -59,27 +58,30 @@ dotenv.config();
 const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
-// ✅ Add this line to enable secure cookies on Render (HTTPS proxy)
+// ✅ Required for Render (behind HTTPS proxy)
 app.set("trust proxy", 1);
 
 app.use(express.json());
 app.use(cookieParser());
 
+// ✅ Allow frontend (Vercel) and local dev
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://chat-frontend-omega-navy.vercel.app"
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // ✅ Allow cookies to be sent
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
 
+// ✅ API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+// ✅ Start server
 server.listen(PORT, () => {
-  console.log("✅ Server is running on PORT:", PORT);
+  console.log(`✅ Server running on port ${PORT}`);
   connectDB();
 });
