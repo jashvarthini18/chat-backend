@@ -94,6 +94,7 @@ export const getReplySuggestions = async (messages) => {
         ],
         temperature: 0.7,
         max_tokens: 150,
+        response_format: { type: "json_object" },
       }),
     });
 
@@ -120,7 +121,6 @@ export const generateToken = (userId, res) => {
     secure: true, // ✅ Always true since Render is HTTPS
     sameSite: "none", // ✅ Required for cross-site cookies (Render <-> Vercel)
     path: "/",
-    domain: ".onrender.com", // ✅ VERY IMPORTANT for Render cookies
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
