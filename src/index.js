@@ -71,7 +71,7 @@ app.use(
       "http://localhost:5173",
       "https://chat-frontend-omega-navy.vercel.app"
     ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    // methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
