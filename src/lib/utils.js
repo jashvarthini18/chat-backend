@@ -117,12 +117,11 @@ export const generateToken = (userId, res) => {
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    // secure: process.env.NODE_ENV === "production", // ✅ Only HTTPS
-    secure: true,
-    sameSite: "none",
-    // sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✅ Allow cross-site
+    secure: true, // ✅ Always true since Render is HTTPS
+    sameSite: "none", // ✅ Required for cross-site cookies (Render <-> Vercel)
     path: "/",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    domain: ".onrender.com", // ✅ VERY IMPORTANT for Render cookies
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
   return token;
